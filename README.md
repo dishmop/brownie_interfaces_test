@@ -16,19 +16,31 @@ Activate virtual environment
     pipenv shell
     pipenv install
     
-Run tests with coverage
+Run tests. The first one passes and the next two fail - just because we try and make an interface to the contract
  
-    brownie test -C
+    brownie test
 
     
-Note that not all the functions have 100% coverage. Check out the GUI:
+You can demo it in the console too. 
  
-    brownie gui
+    brownie console
     
-Note that the only red areas are in the modifier code. The tests attempt to access both addDocHash and removeDocHash as a securityGenerator role and something that isn't that role.
+Paste these lines in one at a time
 
-Try to change the tests in a way which does give us 100% coverage - I wasn't able to.
+    bar = Bar.deploy({"from": accounts[0]})
+    
+    # Note that the test event is fired
+    tx1 = bar.testEvent()
+    tx1.events
 
 
-
-
+    # try again and all fine
+    tx2 = bar.testEvent()
+    tx2.events
+    
+    # attempt to get an interface object
+    iFoo = interface.IFoo(bar)
+    
+    # Now the TestEvent isn't there
+    tx3 = bar.testEvent()
+    tx3.events    
