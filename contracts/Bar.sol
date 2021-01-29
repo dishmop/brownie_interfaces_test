@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-import "./IFoo.sol";
+import "interfaces/IFoo.sol";
 
 contract Bar is IFoo {
     event TestEvent(uint256 value);
